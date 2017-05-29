@@ -1,0 +1,2 @@
+# seriesmanager
+Series Manager
