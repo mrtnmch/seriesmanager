@@ -145,7 +145,7 @@ func main() {
 			}
 
 			if !silent {
-				fmt.Printf("%s\n%s\n---\n", file, gen)
+				fmt.Printf("%s\n%s\n\n", file, gen)
 			}
 		}
 	}
