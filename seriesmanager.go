@@ -3,17 +3,19 @@ package main
 import (
 	"flag"
 	"fmt"
+	"path"
 )
 
 const CONFIG_FILE = ".sm-config.json"
 
 func main() {
-	var createSymlinks, testRun, silent, force, moved bool
+	var createSymlinks, testRun, silent, force, moved, renameOnly bool
 
 	flag.BoolVar(&createSymlinks, "symlink", false, "Create a symlink in the original location")
 	flag.BoolVar(&testRun, "test", false, "Do only a test run, don't move files or create symlinks")
 	flag.BoolVar(&silent, "silent", false, "Silent run - do not print any output")
 	flag.BoolVar(&force, "force", false, "Force move - even if the target file exists (override)")
+	flag.BoolVar(&renameOnly, "rename", false, "Rename only - do not move")
 	flag.Parse()
 
 	config, err := LoadConfig(relativePath(CONFIG_FILE))
@@ -24,11 +26,11 @@ func main() {
 		config.Save(relativePath(CONFIG_FILE))
 	}
 
-	for _, path := range config.InputPaths {
-		files, err := listFiles(path, true)
+	for _, inputPath := range config.InputPaths {
+		files, err := listFiles(inputPath, true)
 
 		if err != nil {
-			fmt.Printf("Error while loading '%s'\n", path)
+			fmt.Printf("Error while loading '%s'\n", inputPath)
 			continue
 		}
 
@@ -43,6 +45,10 @@ func main() {
 			season, episode, err2 := sedetector.Detect(file)
 
 			if err == nil && err2 == nil {
+				if renameOnly {
+					generator = NewNameGenerator(path.Dir(file), generator.pad, true)
+				}
+
 				gen := generator.GenerateLocation(det, season, episode, getExtension(file))
 
 				if gen == file {
@@ -78,10 +84,10 @@ func main() {
 	}
 
 	if testRun && !silent {
-		fmt.Println("Test run - no files moved")
+		fmt.Println("Test run - no files moved or renamed")
 	}
 
 	if !moved && !silent {
-		fmt.Println("No files moved, everything's where it belongs")
+		fmt.Println("No files moved or renamed, everything's where it belongs")
 	}
 }

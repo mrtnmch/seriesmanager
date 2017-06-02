@@ -34,7 +34,7 @@ func CreateDefaultConfig() *Config {
 
 	config.seriesDetector = NewSeriesDetector(config.Series)
 	config.sessionEpisodeDetector = NewSeasonEpisodeDetector()
-	config.nameGenerator = NewNameGenerator(config.OutputPath, config.PadNumbers)
+	config.nameGenerator = NewNameGenerator(config.OutputPath, config.PadNumbers, false)
 
 	return config
 }
@@ -54,7 +54,7 @@ func (config *Config) Save(path string) error {
 func (config *Config) Reload() {
 	config.seriesDetector = NewSeriesDetector(config.Series)
 	config.sessionEpisodeDetector = NewSeasonEpisodeDetector()
-	config.nameGenerator = NewNameGenerator(config.OutputPath, config.PadNumbers)
+	config.nameGenerator = NewNameGenerator(config.OutputPath, config.PadNumbers, false)
 }
 
 func LoadConfig(path string) (*Config, error) {

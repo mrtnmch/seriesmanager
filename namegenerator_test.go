@@ -3,7 +3,7 @@ package main
 import "testing"
 
 func TestFilenameGenerator(t *testing.T) {
-	generator := NewNameGenerator("/home/user/videos", 2)
+	generator := NewNameGenerator("/home/user/videos", 2, false)
 
 	pairs := []struct {
 		Title    string
@@ -20,7 +20,7 @@ func TestFilenameGenerator(t *testing.T) {
 		}
 	}
 
-	generator = NewNameGenerator("/home/user/videos", 0)
+	generator = NewNameGenerator("/home/user/videos", 0, false)
 	pairs = []struct {
 		Title    string
 		Season   int
@@ -38,7 +38,7 @@ func TestFilenameGenerator(t *testing.T) {
 }
 
 func TestFilepathGenerator(t *testing.T) {
-	generator := NewNameGenerator("/home/user/videos", 2)
+	generator := NewNameGenerator("/home/user/videos", 2, false)
 
 	pairs := []struct {
 		Title    string
@@ -55,7 +55,7 @@ func TestFilepathGenerator(t *testing.T) {
 		}
 	}
 
-	generator = NewNameGenerator("/home/user/videos", 0)
+	generator = NewNameGenerator("/home/user/videos", 0, false)
 	pairs = []struct {
 		Title    string
 		Season   int
@@ -73,7 +73,7 @@ func TestFilepathGenerator(t *testing.T) {
 }
 
 func TestLocationGenerator(t *testing.T) {
-	generator := NewNameGenerator("/home/user/videos", 2)
+	generator := NewNameGenerator("/home/user/videos", 2, false)
 
 	pairs := []struct {
 		Title     string
@@ -91,7 +91,7 @@ func TestLocationGenerator(t *testing.T) {
 		}
 	}
 
-	generator = NewNameGenerator("/home/user/videos", 0)
+	generator = NewNameGenerator("/home/user/videos", 0, false)
 	pairs = []struct {
 		Title     string
 		Season    int

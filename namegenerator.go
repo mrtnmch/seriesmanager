@@ -18,12 +18,18 @@ type NameGenerator struct {
 	basePath    string
 }
 
-func NewNameGenerator(basePath string, pad int) *NameGenerator {
+func NewNameGenerator(basePath string, pad int, renameOnly bool) *NameGenerator {
 	generator := new(NameGenerator)
 	generator.pattern = fmt.Sprintf("%s s%se%s", titleWildcard, seasonWildcard, episodeWildcard)
-	generator.pad = pad
-	generator.pathPattern = fmt.Sprintf("/%s/S%s/", titleWildcard, seasonWildcard)
 	generator.basePath = basePath
+	generator.pad = pad
+
+	if renameOnly {
+		generator.pathPattern = "/"
+	} else {
+		generator.pathPattern = fmt.Sprintf("/%s/S%s/", titleWildcard, seasonWildcard)
+	}
+
 	return generator
 }
 
