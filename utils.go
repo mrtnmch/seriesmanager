@@ -6,6 +6,8 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+
+	"github.com/kardianos/osext"
 )
 
 func listFiles(path string, recursive bool) ([]string, error) {
@@ -88,12 +90,14 @@ func exists(path string) bool {
 }
 
 func getExecPath() string {
-	ex, err := os.Executable()
+	ex, err := osext.ExecutableFolder()
 	if err != nil {
 		panic(err)
 	}
-	exPath := path.Dir(ex)
-	return exPath
+
+	fmt.Printf("Path: %s\n", ex)
+
+	return ex
 }
 
 func relativePath(file string) string {
