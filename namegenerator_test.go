@@ -15,7 +15,7 @@ func TestFilenameGenerator(t *testing.T) {
 		{"How I Met Your Mother", 10, 221, "How I Met Your Mother s10e221"}}
 
 	for _, pair := range pairs {
-		if gen := generator.GenerateFilename(pair.Title, pair.Season, pair.Episode, GetExtension(pair.Expected)); gen != pair.Expected {
+		if gen := generator.GenerateFilename(pair.Title, pair.Season, pair.Episode, getExtension(pair.Expected)); gen != pair.Expected {
 			t.Errorf("Name should be '%s'; '%s' returned", pair.Expected, gen)
 		}
 	}
@@ -31,7 +31,7 @@ func TestFilenameGenerator(t *testing.T) {
 		{"How I Met Your Mother", 10, 221, "How I Met Your Mother s10e221"}}
 
 	for _, pair := range pairs {
-		if gen := generator.GenerateFilename(pair.Title, pair.Season, pair.Episode, GetExtension(pair.Expected)); gen != pair.Expected {
+		if gen := generator.GenerateFilename(pair.Title, pair.Season, pair.Episode, getExtension(pair.Expected)); gen != pair.Expected {
 			t.Errorf("Name should be '%s'; '%s' returned", pair.Expected, gen)
 		}
 	}

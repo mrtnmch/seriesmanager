@@ -58,7 +58,7 @@ func TestGetExtension(t *testing.T) {
 		{"/this/has/no/extension", ""}}
 
 	for _, pair := range pairs {
-		if ext := GetExtension(pair.Filename); ext != pair.Expected {
+		if ext := getExtension(pair.Filename); ext != pair.Expected {
 			t.Errorf("Extension should be '%s', '%s' returned", pair.Expected, ext)
 		}
 	}
